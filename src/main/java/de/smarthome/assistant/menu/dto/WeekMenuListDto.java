@@ -21,19 +21,15 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.menu;
+package de.smarthome.assistant.menu.dto;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class MenuApplicationTests {
+@Getter
+@Setter
+public class WeekMenuListDto {
 
-	@Test
-	public void contextLoads() {
-	}
-
+    private List<WeekMenuDto> weekMenuDtos;
 }

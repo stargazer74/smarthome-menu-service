@@ -21,19 +21,15 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.menu;
+package de.smarthome.assistant.menu.persistance.repository;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import de.smarthome.assistant.menu.persistance.model.Week;
+import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class MenuApplicationTests {
+@Repository
+public interface WeekDao extends JpaRepository<Week, Long> {
 
-	@Test
-	public void contextLoads() {
-	}
-
+    Optional<Week> findByWeekNumberAndYear(int weekNumber, int year);
 }

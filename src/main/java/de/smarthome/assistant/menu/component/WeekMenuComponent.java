@@ -1,0 +1,60 @@
+/*
+ * Copyright (c) 2019. Chris Wohlbrecht
+ *
+ * MIT License
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package de.smarthome.assistant.menu.component;
+
+import de.smarthome.assistant.menu.dto.WeekMenuDto;
+import de.smarthome.assistant.menu.dto.WeekMenuListDto;
+import de.smarthome.assistant.menu.dto.mapper.WeekMenuMapper;
+import de.smarthome.assistant.menu.persistance.repository.WeekMenuDao;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import org.springframework.stereotype.Component;
+
+@Component
+public class WeekMenuComponent implements WeekMenuI {
+
+    private final WeekMenuDao weekMenuDao;
+
+    public WeekMenuComponent(WeekMenuDao weekMenuDao) {
+        this.weekMenuDao = weekMenuDao;
+    }
+
+    /**
+     * Returns a Optional<WeekMenuListDto> with a list of all menus in the database.
+     *
+     * @return Optional<WeekMenuListDto>
+     */
+    public Optional<WeekMenuListDto> getAllMenus() {
+        final List<WeekMenuDto> weekMenuDtos = weekMenuDao.findAll().stream().map(WeekMenuMapper.INSTANCE::menu2WeekMenuDto)
+                .collect(Collectors.toList());
+
+        if(weekMenuDtos.isEmpty())
+            return Optional.empty();
+
+        final WeekMenuListDto weekMenuListDto = new WeekMenuListDto();
+        weekMenuListDto.setWeekMenuDtos(weekMenuDtos);
+        return Optional.of(weekMenuListDto);
+    }
+}

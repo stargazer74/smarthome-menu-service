@@ -21,19 +21,33 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.menu;
+package de.smarthome.assistant.menu.controller;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import de.smarthome.assistant.menu.component.WeekMenuI;
+import de.smarthome.assistant.menu.dto.WeekMenuListDto;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class MenuApplicationTests {
+@RestController
+@RequestMapping(value = "/menu-service")
+public class MenuServiceController {
 
-	@Test
-	public void contextLoads() {
-	}
+    private final WeekMenuI weekMenuI;
+
+    public MenuServiceController(WeekMenuI weekMenuI) {
+        this.weekMenuI = weekMenuI;
+    }
+
+    /**
+     * Returns a WeekmenuListDto with a list of all menus stored in the database.
+     *
+     * @return ResponseEntity<WeekMenuListDto>
+     */
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ResponseEntity<WeekMenuListDto> list() {
+        return this.weekMenuI.getAllMenus().map(a -> ResponseEntity.ok().body(a)).orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
 }

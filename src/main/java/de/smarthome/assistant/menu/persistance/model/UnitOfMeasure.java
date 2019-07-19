@@ -21,19 +21,36 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.menu;
+package de.smarthome.assistant.menu.persistance.model;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class MenuApplicationTests {
+@Entity
+@Getter
+@Setter
+@EqualsAndHashCode
+@Table(name = "unit_of_measure")
+public class UnitOfMeasure {
 
-	@Test
-	public void contextLoads() {
-	}
+    @Id
+    @GeneratedValue
+    private Long id;
 
+    private String name;
+
+    @Column(name = "short_name")
+    private String shortName;
+
+    @ManyToMany(mappedBy = "unitOfMeasures", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private List<Product> products;
 }

@@ -21,19 +21,17 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.menu;
+package de.smarthome.assistant.menu.dto.mapper;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import de.smarthome.assistant.menu.dto.WeekMenuDto;
+import de.smarthome.assistant.menu.persistance.model.Menu;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class MenuApplicationTests {
+@Mapper(componentModel = "spring")
+public interface WeekMenuMapper {
 
-	@Test
-	public void contextLoads() {
-	}
+    WeekMenuMapper INSTANCE = Mappers.getMapper(WeekMenuMapper.class);
 
+    WeekMenuDto menu2WeekMenuDto(Menu menu);
 }
