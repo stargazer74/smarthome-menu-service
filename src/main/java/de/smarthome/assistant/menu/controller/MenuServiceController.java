@@ -41,7 +41,7 @@ public class MenuServiceController {
     }
 
     /**
-     * Returns a WeekmenuListDto with a list of all menus stored in the database.
+     * Returns a WeekMenuListDto with a list of all menus stored in the database.
      *
      * @return ResponseEntity<WeekMenuListDto>
      */
@@ -49,5 +49,4 @@ public class MenuServiceController {
     public ResponseEntity<WeekMenuListDto> list() {
         return this.weekMenuI.getAllMenus().map(a -> ResponseEntity.ok().body(a)).orElseGet(() -> ResponseEntity.notFound().build());
     }
-
 }
