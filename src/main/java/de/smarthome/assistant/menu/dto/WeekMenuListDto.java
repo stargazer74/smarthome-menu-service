@@ -31,5 +31,5 @@ import lombok.Setter;
 @Setter
 public class WeekMenuListDto {
 
-    private List<WeekMenuDto> weekMenuDtos;
+    private List<MenuResponseDto> weekMenuDtos;
 }

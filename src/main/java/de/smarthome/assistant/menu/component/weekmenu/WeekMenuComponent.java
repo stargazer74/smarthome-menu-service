@@ -21,9 +21,10 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.menu.component;
+package de.smarthome.assistant.menu.component.weekmenu;
 
-import de.smarthome.assistant.menu.dto.WeekMenuDto;
+import de.smarthome.assistant.menu.dto.MenuRequestDto;
+import de.smarthome.assistant.menu.dto.MenuResponseDto;
 import de.smarthome.assistant.menu.dto.WeekMenuListDto;
 import de.smarthome.assistant.menu.dto.mapper.WeekMenuMapper;
 import de.smarthome.assistant.menu.persistance.repository.WeekMenuDao;
@@ -47,7 +48,7 @@ public class WeekMenuComponent implements WeekMenuI {
      * @return Optional<WeekMenuListDto>
      */
     public Optional<WeekMenuListDto> getAllMenus() {
-        final List<WeekMenuDto> weekMenuDtos = weekMenuDao.findAll().stream().map(WeekMenuMapper.INSTANCE::menu2WeekMenuDto)
+        final List<MenuResponseDto> weekMenuDtos = weekMenuDao.findAll().stream().map(WeekMenuMapper.INSTANCE::menu2MenuResponseDto)
                 .collect(Collectors.toList());
 
         if(weekMenuDtos.isEmpty())

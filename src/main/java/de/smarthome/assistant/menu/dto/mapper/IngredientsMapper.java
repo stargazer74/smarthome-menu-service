@@ -21,11 +21,24 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.menu.component;
+package de.smarthome.assistant.menu.dto.mapper;
 
-import de.smarthome.assistant.menu.dto.WeekMenuListDto;
-import java.util.Optional;
+import de.smarthome.assistant.menu.dto.IngredientsRequestDto;
+import de.smarthome.assistant.menu.dto.IngredientsResponseDto;
+import de.smarthome.assistant.menu.persistance.model.Ingredient;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.factory.Mappers;
 
-public interface WeekMenuI {
-    Optional<WeekMenuListDto> getAllMenus();
+@Mapper(componentModel = "spring")
+public interface IngredientsMapper {
+
+    IngredientsMapper INSTANCE = Mappers.getMapper(IngredientsMapper.class);
+
+    @Mappings({ @Mapping(source = "unitOfMeasureName", target = "unitOfMeasure.name") })
+    Ingredient IngredientsRequestDtoToIngredient(IngredientsRequestDto ingredientsRequestDto);
+
+    @Mappings({ @Mapping(source = "unitOfMeasure.name", target = "unitOfMeasureName") })
+    IngredientsResponseDto IngredientsToIngredientsResponseDto(Ingredient ingredient);
 }

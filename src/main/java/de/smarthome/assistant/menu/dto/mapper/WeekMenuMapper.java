@@ -23,7 +23,7 @@
 
 package de.smarthome.assistant.menu.dto.mapper;
 
-import de.smarthome.assistant.menu.dto.WeekMenuDto;
+import de.smarthome.assistant.menu.dto.MenuResponseDto;
 import de.smarthome.assistant.menu.persistance.model.Menu;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -33,5 +33,5 @@ public interface WeekMenuMapper {
 
     WeekMenuMapper INSTANCE = Mappers.getMapper(WeekMenuMapper.class);
 
-    WeekMenuDto menu2WeekMenuDto(Menu menu);
+    MenuResponseDto menu2MenuResponseDto(Menu menu);
 }

@@ -21,32 +21,35 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.menu.controller;
+package de.smarthome.assistant.menu.component.menu;
 
-import de.smarthome.assistant.menu.component.WeekMenuI;
-import de.smarthome.assistant.menu.dto.WeekMenuListDto;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import de.smarthome.assistant.menu.dto.MenuRequestDto;
+import de.smarthome.assistant.menu.dto.MenuResponseDto;
+import de.smarthome.assistant.menu.dto.mapper.MenuMapper;
+import de.smarthome.assistant.menu.persistance.model.Menu;
+import de.smarthome.assistant.menu.persistance.repository.MenuDao;
+import java.util.Optional;
+import org.springframework.stereotype.Component;
 
-@RestController
-@RequestMapping(value = "/menu-service")
-public class MenuServiceController {
+@Component
+public class MenuComponent implements MenuI {
 
-    private final WeekMenuI weekMenuI;
+    private final MenuDao menuRepository;
 
-    public MenuServiceController(WeekMenuI weekMenuI) {
-        this.weekMenuI = weekMenuI;
+    public MenuComponent(MenuDao menuRepository) {
+        this.menuRepository = menuRepository;
     }
 
     /**
-     * Returns a WeekMenuListDto with a list of all menus stored in the database.
+     * Saves the incoming {@link MenuRequestDto} and returns an Optional of {@link MenuResponseDto}
      *
-     * @return ResponseEntity<WeekMenuListDto>
+     * @param menuRequestDto a {@link MenuRequestDto} object
+     * @return Optional of {@link MenuResponseDto}
      */
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity<WeekMenuListDto> list() {
-        return this.weekMenuI.getAllMenus().map(a -> ResponseEntity.ok().body(a)).orElseGet(() -> ResponseEntity.notFound().build());
+    @Override
+    public Optional<MenuResponseDto> insert(MenuRequestDto menuRequestDto) {
+        final Menu menu = menuRepository.save(MenuMapper.INSTANCE.MenuRequestDto2Menu(menuRequestDto));
+        return null;
+//        return Optional.ofNullable(MenuMapper.INSTANCE.Menu2menusResponseDto(menu));
     }
 }

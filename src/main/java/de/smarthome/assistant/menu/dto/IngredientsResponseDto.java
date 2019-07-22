@@ -21,35 +21,26 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.menu.persistance.model;
+package de.smarthome.assistant.menu.dto;
 
 import de.smarthome.assistant.menu.persistance.model.type.UnitOfMeasures;
-import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-import lombok.EqualsAndHashCode;
+import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
-@EqualsAndHashCode
-@Table(name = "unit_of_measure")
-public class UnitOfMeasure {
+public class IngredientsResponseDto {
 
-    @Id
-    @GeneratedValue
+    @NotNull
     private Long id;
 
     @NotEmpty
-    private UnitOfMeasures name;
+    private String name;
 
-    @OneToMany(mappedBy = "unitOfMeasure")
-    private List<Ingredient> ingredients;
+    private String amount;
+
+    private UnitOfMeasures unitOfMeasureName;
+
 }

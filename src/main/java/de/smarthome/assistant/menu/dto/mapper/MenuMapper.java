@@ -21,7 +21,21 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.menu.dto;
+package de.smarthome.assistant.menu.dto.mapper;
 
-public class WeekMenuDto {
+import de.smarthome.assistant.menu.dto.MenuRequestDto;
+import de.smarthome.assistant.menu.dto.MenuResponseDto;
+import de.smarthome.assistant.menu.persistance.model.Menu;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+
+@Mapper(componentModel = "spring")
+public interface MenuMapper {
+
+    MenuMapper INSTANCE = Mappers.getMapper(MenuMapper.class);
+
+    Menu MenuRequestDto2Menu(MenuRequestDto menuRequestDto);
+
+    MenuResponseDto Menu2menusResponseDto(Menu menu);
+
 }

@@ -23,13 +23,16 @@
 
 package de.smarthome.assistant.menu.persistance.model;
 
-import de.smarthome.assistant.menu.persistance.model.type.UnitOfMeasures;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import lombok.EqualsAndHashCode;
@@ -40,16 +43,27 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode
-@Table(name = "unit_of_measure")
-public class UnitOfMeasure {
+@Table(name = "ingredient")
+public class Ingredient {
 
     @Id
     @GeneratedValue
     private Long id;
 
     @NotEmpty
-    private UnitOfMeasures name;
+    private String name;
 
-    @OneToMany(mappedBy = "unitOfMeasure")
-    private List<Ingredient> ingredients;
+    private Long amount;
+
+    @Column(name = "external_id")
+    private String externalId;
+
+    @ManyToMany(mappedBy = "ingredients", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private List<Menu> menus;
+
+
+    @ManyToOne
+    @JoinColumn(name = "unit_of_measure_id", nullable = false)
+    private UnitOfMeasure unitOfMeasure;
+
 }

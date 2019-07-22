@@ -21,45 +21,24 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.menu.persistance.model;
+package de.smarthome.assistant.menu.dto;
 
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import lombok.EqualsAndHashCode;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
-@EqualsAndHashCode
-@Table(name = "product")
-public class Product {
+public class MenuResponseDto {
 
-    @Id
-    @GeneratedValue
+    @NotNull
     private Long id;
 
+    @NotEmpty
     private String name;
 
-    @Column(name = "external_id")
-    private String externalId;
-
-    @ManyToMany(mappedBy = "products", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    private List<Menu> menus;
-
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinTable(name = "product_has_unit_of_measure", joinColumns = {
-            @JoinColumn(name = "product_id", referencedColumnName = "id") }, inverseJoinColumns = {
-            @JoinColumn(name = "unit_of_measure_id", referencedColumnName = "id") })
-    private List<UnitOfMeasure> unitOfMeasures;
+    private List<IngredientsResponseDto> ingedients;
 
 }

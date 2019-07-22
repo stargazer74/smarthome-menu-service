@@ -55,7 +55,7 @@ public class Menu {
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "menu_has_product", joinColumns = {
             @JoinColumn(name = "menu_id", referencedColumnName = "id") }, inverseJoinColumns = {
-            @JoinColumn(name = "product_id", referencedColumnName = "id") })
-    private List<Product> products;
+            @JoinColumn(name = "ingredient_id", referencedColumnName = "id") })
+    private List<Ingredient> ingredients;
 
 }

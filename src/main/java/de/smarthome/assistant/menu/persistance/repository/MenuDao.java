@@ -21,35 +21,12 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.menu.persistance.model;
+package de.smarthome.assistant.menu.persistance.repository;
 
-import de.smarthome.assistant.menu.persistance.model.type.UnitOfMeasures;
-import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import de.smarthome.assistant.menu.persistance.model.Menu;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@Entity
-@Getter
-@Setter
-@EqualsAndHashCode
-@Table(name = "unit_of_measure")
-public class UnitOfMeasure {
-
-    @Id
-    @GeneratedValue
-    private Long id;
-
-    @NotEmpty
-    private UnitOfMeasures name;
-
-    @OneToMany(mappedBy = "unitOfMeasure")
-    private List<Ingredient> ingredients;
+@Repository
+public interface MenuDao extends JpaRepository<Menu, Long> {
 }

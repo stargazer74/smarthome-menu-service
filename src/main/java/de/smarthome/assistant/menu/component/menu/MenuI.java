@@ -21,35 +21,14 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.menu.persistance.model;
+package de.smarthome.assistant.menu.component.menu;
 
-import de.smarthome.assistant.menu.persistance.model.type.UnitOfMeasures;
-import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import de.smarthome.assistant.menu.dto.MenuRequestDto;
+import de.smarthome.assistant.menu.dto.MenuResponseDto;
+import java.util.Optional;
 
-@Entity
-@Getter
-@Setter
-@EqualsAndHashCode
-@Table(name = "unit_of_measure")
-public class UnitOfMeasure {
+public interface MenuI {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+    Optional<MenuResponseDto> insert(MenuRequestDto menuRequestDto);
 
-    @NotEmpty
-    private UnitOfMeasures name;
-
-    @OneToMany(mappedBy = "unitOfMeasure")
-    private List<Ingredient> ingredients;
 }
