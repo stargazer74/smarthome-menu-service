@@ -49,8 +49,7 @@ import lombok.Setter;
 public class Ingredient {
 
     @Id
-    @SequenceGenerator(name = "generator.sequence_ingredient", sequenceName = "sequence_ingredient", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "generator.sequence_ingredient")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty

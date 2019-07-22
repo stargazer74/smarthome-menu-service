@@ -48,8 +48,7 @@ import lombok.Setter;
 public class Week {
 
     @Id
-    @SequenceGenerator(name = "generator.sequence_week", sequenceName = "sequence_ingredient_week", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "generator.sequence_week")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "week_number")

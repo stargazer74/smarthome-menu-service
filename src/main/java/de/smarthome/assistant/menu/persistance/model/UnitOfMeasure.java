@@ -46,8 +46,7 @@ import lombok.Setter;
 public class UnitOfMeasure {
 
     @Id
-    @SequenceGenerator(name = "generator.sequence_unit_of_measure", sequenceName = "sequence_ingredient_unit_of_measure", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "generator.sequence_unit_of_measure")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty

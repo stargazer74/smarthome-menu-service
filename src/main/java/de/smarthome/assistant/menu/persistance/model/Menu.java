@@ -46,8 +46,7 @@ import lombok.Setter;
 public class Menu {
 
     @Id
-    @SequenceGenerator(name = "generator.sequence_menu", sequenceName = "sequence_menu", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "generator.sequence_menu")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
