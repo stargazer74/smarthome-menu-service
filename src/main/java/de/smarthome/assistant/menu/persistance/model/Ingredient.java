@@ -28,11 +28,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import lombok.EqualsAndHashCode;
@@ -47,7 +49,8 @@ import lombok.Setter;
 public class Ingredient {
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "generator.sequence_ingredient", sequenceName = "sequence_ingredient", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "generator.sequence_ingredient")
     private Long id;
 
     @NotEmpty

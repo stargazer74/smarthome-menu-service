@@ -29,6 +29,7 @@ import de.smarthome.assistant.menu.dto.IngredientsRequestDto;
 import de.smarthome.assistant.menu.dto.MenuRequestDto;
 import de.smarthome.assistant.menu.dto.MenuResponseDto;
 import de.smarthome.assistant.menu.persistance.model.type.UnitOfMeasures;
+import de.smarthome.assistant.menu.persistance.repository.MenuDao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +43,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @DataJpaTest
 public class MenuComponentTest {
 
-    @Autowired MenuI menuComponent;
+    @Autowired
+    private MenuDao menuDao;
 
     @Test
     public void insertSuccessTest() {
@@ -61,7 +63,8 @@ public class MenuComponentTest {
         menuRequestDto.setIngredients(ingredientsRequestDtos);
         menuRequestDto.setName("Grießbrei");
 
-        final Optional<MenuResponseDto> menuResponseDto = this.menuComponent.insert(menuRequestDto);
+        final MenuComponent menuComponent = new MenuComponent(this.menuDao);
+        final Optional<MenuResponseDto> menuResponseDto = menuComponent.insert(menuRequestDto);
 
         /*
          * test

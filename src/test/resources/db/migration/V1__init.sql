@@ -32,13 +32,14 @@ CREATE TABLE IF NOT EXISTS `menu_service`.`ingredient` (
                                                            `amount` VARCHAR(45) NULL,
                                                            `unit_of_measure_id` INT NOT NULL,
                                                            PRIMARY KEY (`id`),
-                                                           INDEX `fk_product_unit_of_measure1_idx` (`unit_of_measure_id` ASC),
                                                            CONSTRAINT `fk_product_unit_of_measure1`
                                                                FOREIGN KEY (`unit_of_measure_id`)
                                                                    REFERENCES `menu_service`.`unit_of_measure` (`id`)
                                                                    ON DELETE NO ACTION
                                                                    ON UPDATE NO ACTION)
     ENGINE = InnoDB;
+
+CREATE INDEX `fk_product_unit_of_measure1_idx` ON `menu_service`.`ingredient` (`unit_of_measure_id` ASC);
 
 
 -- -----------------------------------------------------
@@ -58,8 +59,6 @@ CREATE TABLE IF NOT EXISTS `menu_service`.`week_has_menu` (
                                                               `week_id` INT NOT NULL,
                                                               `menu_id` INT NOT NULL,
                                                               PRIMARY KEY (`week_id`, `menu_id`),
-                                                              INDEX `fk_week_has_menu_menu1_idx` (`menu_id` ASC),
-                                                              INDEX `fk_week_has_menu_week_idx` (`week_id` ASC),
                                                               CONSTRAINT `fk_week_has_menu_week`
                                                                   FOREIGN KEY (`week_id`)
                                                                       REFERENCES `menu_service`.`week` (`id`)
@@ -72,6 +71,10 @@ CREATE TABLE IF NOT EXISTS `menu_service`.`week_has_menu` (
                                                                       ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
+CREATE INDEX `fk_week_has_menu_menu1_idx` ON `menu_service`.`week_has_menu` (`menu_id` ASC);
+
+CREATE INDEX `fk_week_has_menu_week_idx` ON `menu_service`.`week_has_menu` (`week_id` ASC);
+
 
 -- -----------------------------------------------------
 -- Table `menu_service`.`menu_has_ingredient`
@@ -80,8 +83,6 @@ CREATE TABLE IF NOT EXISTS `menu_service`.`menu_has_ingredient` (
                                                                     `menu_id` INT NOT NULL,
                                                                     `ingredient_id` INT NOT NULL,
                                                                     PRIMARY KEY (`menu_id`, `ingredient_id`),
-                                                                    INDEX `fk_menu_has_ingredient_ingredient1_idx` (`ingredient_id` ASC),
-                                                                    INDEX `fk_menu_has_ingredient_menu1_idx` (`menu_id` ASC),
                                                                     CONSTRAINT `fk_menu_has_ingredient_menu1`
                                                                         FOREIGN KEY (`menu_id`)
                                                                             REFERENCES `menu_service`.`menu` (`id`)

@@ -29,10 +29,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -46,7 +48,8 @@ import lombok.Setter;
 public class Week {
 
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "generator.sequence_week", sequenceName = "sequence_ingredient_week", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "generator.sequence_week")
     private Long id;
 
     @Column(name = "week_number")
