@@ -27,16 +27,16 @@ import de.smarthome.assistant.menu.dto.MenuRequestDto;
 import de.smarthome.assistant.menu.dto.MenuResponseDto;
 import de.smarthome.assistant.menu.dto.mapper.MenuMapper;
 import de.smarthome.assistant.menu.persistance.model.Menu;
-import de.smarthome.assistant.menu.persistance.repository.MenuDao;
+import de.smarthome.assistant.menu.persistance.repository.MenuRepository;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MenuComponent implements MenuI {
 
-    private final MenuDao menuRepository;
+    private final MenuRepository menuRepository;
 
-    public MenuComponent(MenuDao menuRepository) {
+    public MenuComponent(MenuRepository menuRepository) {
         this.menuRepository = menuRepository;
     }
 

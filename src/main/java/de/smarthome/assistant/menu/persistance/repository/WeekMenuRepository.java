@@ -23,13 +23,10 @@
 
 package de.smarthome.assistant.menu.persistance.repository;
 
-import de.smarthome.assistant.menu.persistance.model.Week;
-import java.util.Optional;
+import de.smarthome.assistant.menu.persistance.model.Menu;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface WeekDao extends JpaRepository<Week, Long> {
-
-    Optional<Week> findByWeekNumberAndYear(int weekNumber, int year);
+public interface WeekMenuRepository extends JpaRepository<Menu, Long> {
 }

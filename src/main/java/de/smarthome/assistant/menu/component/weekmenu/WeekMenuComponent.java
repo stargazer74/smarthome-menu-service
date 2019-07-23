@@ -23,11 +23,10 @@
 
 package de.smarthome.assistant.menu.component.weekmenu;
 
-import de.smarthome.assistant.menu.dto.MenuRequestDto;
 import de.smarthome.assistant.menu.dto.MenuResponseDto;
 import de.smarthome.assistant.menu.dto.WeekMenuListDto;
 import de.smarthome.assistant.menu.dto.mapper.WeekMenuMapper;
-import de.smarthome.assistant.menu.persistance.repository.WeekMenuDao;
+import de.smarthome.assistant.menu.persistance.repository.WeekMenuRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,10 +35,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class WeekMenuComponent implements WeekMenuI {
 
-    private final WeekMenuDao weekMenuDao;
+    private final WeekMenuRepository weekMenuRepository;
 
-    public WeekMenuComponent(WeekMenuDao weekMenuDao) {
-        this.weekMenuDao = weekMenuDao;
+    public WeekMenuComponent(WeekMenuRepository weekMenuRepository) {
+        this.weekMenuRepository = weekMenuRepository;
     }
 
     /**
@@ -48,7 +47,7 @@ public class WeekMenuComponent implements WeekMenuI {
      * @return Optional<WeekMenuListDto>
      */
     public Optional<WeekMenuListDto> getAllMenus() {
-        final List<MenuResponseDto> weekMenuDtos = weekMenuDao.findAll().stream().map(WeekMenuMapper.INSTANCE::menu2MenuResponseDto)
+        final List<MenuResponseDto> weekMenuDtos = weekMenuRepository.findAll().stream().map(WeekMenuMapper.INSTANCE::menu2MenuResponseDto)
                 .collect(Collectors.toList());
 
         if(weekMenuDtos.isEmpty())
