@@ -47,6 +47,7 @@ public class WeekMenuComponent implements WeekMenuI {
      * @return Optional<WeekMenuListDto>
      */
     public Optional<WeekMenuListDto> getAllMenus() {
+
         final List<MenuResponseDto> weekMenuDtos = weekMenuRepository.findAll().stream().map(WeekMenuMapper.INSTANCE::menu2MenuResponseDto)
                 .collect(Collectors.toList());
 

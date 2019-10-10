@@ -25,6 +25,7 @@ package de.smarthome.assistant.menu.persistance.model;
 
 import de.smarthome.assistant.menu.persistance.model.type.UnitOfMeasures;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,7 +47,7 @@ import lombok.Setter;
 public class UnitOfMeasure {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotEmpty

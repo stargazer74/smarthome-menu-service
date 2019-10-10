@@ -27,5 +27,7 @@ import de.smarthome.assistant.menu.dto.WeekMenuListDto;
 import java.util.Optional;
 
 public interface WeekMenuI {
+
     Optional<WeekMenuListDto> getAllMenus();
+
 }

@@ -72,5 +72,4 @@ public class MenuComponentTest {
         assertTrue(menuResponseDto.isPresent());
 
     }
-
 }
