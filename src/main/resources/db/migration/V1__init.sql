@@ -5,10 +5,10 @@ CREATE SCHEMA IF NOT EXISTS `menu_service`;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `menu_service`.`week`
 (
-    `id`          INT         NOT NULL,
-    `week_number` VARCHAR(45) NOT NULL,
-    `start_date`  VARCHAR(45) NULL,
-    `end_date`    VARCHAR(45) NULL,
+    `id`          INT AUTO_INCREMENT NOT NULL,
+    `week_number` VARCHAR(45)        NOT NULL,
+    `start_date`  VARCHAR(45)        NULL,
+    `end_date`    VARCHAR(45)        NULL,
     PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB;
@@ -19,9 +19,9 @@ CREATE TABLE IF NOT EXISTS `menu_service`.`week`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `menu_service`.`unit_of_measure`
 (
-    `id`         INT         NOT NULL,
-    `short_name` VARCHAR(45) NOT NULL,
-    `name`       VARCHAR(45) NULL,
+    `id`         INT AUTO_INCREMENT NOT NULL,
+    `short_name` VARCHAR(45)        NOT NULL,
+    `name`       VARCHAR(45)        NULL,
     PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB;
@@ -32,11 +32,11 @@ CREATE TABLE IF NOT EXISTS `menu_service`.`unit_of_measure`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `menu_service`.`ingredient`
 (
-    `id`                 INT         NOT NULL,
-    `name`               VARCHAR(45) NOT NULL,
-    `external_id`        VARCHAR(45) NULL,
-    `amount`             VARCHAR(45) NULL,
-    `unit_of_measure_id` INT         NOT NULL,
+    `id`                 INT AUTO_INCREMENT NOT NULL,
+    `name`               VARCHAR(45)        NOT NULL,
+    `external_id`        VARCHAR(45)        NULL,
+    `amount`             VARCHAR(45)        NULL,
+    `unit_of_measure_id` INT                NOT NULL,
     PRIMARY KEY (`id`),
     INDEX `fk_product_unit_of_measure1_idx` (`unit_of_measure_id` ASC),
     CONSTRAINT `fk_product_unit_of_measure1`
@@ -53,8 +53,8 @@ CREATE TABLE IF NOT EXISTS `menu_service`.`ingredient`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `menu_service`.`menu`
 (
-    `id`   INT         NOT NULL,
-    `name` VARCHAR(45) NOT NULL,
+    `id`   INT AUTO_INCREMENT NOT NULL,
+    `name` VARCHAR(45)        NOT NULL,
     PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB;
