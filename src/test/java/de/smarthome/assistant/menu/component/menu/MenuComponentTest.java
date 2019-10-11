@@ -54,7 +54,7 @@ public class MenuComponentTest {
         final IngredientsRequestDto ingredientsRequestDto = new IngredientsRequestDto();
         ingredientsRequestDto.setAmount(2.5f);
         ingredientsRequestDto.setName("Grieß");
-        ingredientsRequestDto.setUnitOfMeasureName(UnitOfMeasures.LITER);
+        ingredientsRequestDto.setUnitOfMeasure(UnitOfMeasures.LITER);
 
         List<IngredientsRequestDto> ingredientsRequestDtos = new ArrayList<>();
         ingredientsRequestDtos.add(ingredientsRequestDto);

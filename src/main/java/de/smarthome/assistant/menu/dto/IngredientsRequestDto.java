@@ -38,6 +38,6 @@ public class IngredientsRequestDto {
 
     private Float amount;
 
-    private UnitOfMeasures unitOfMeasureName;
+    private UnitOfMeasures unitOfMeasure;
 
 }

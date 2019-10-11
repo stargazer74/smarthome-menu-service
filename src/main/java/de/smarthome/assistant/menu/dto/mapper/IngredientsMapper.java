@@ -36,9 +36,9 @@ public interface IngredientsMapper {
 
     IngredientsMapper INSTANCE = Mappers.getMapper(IngredientsMapper.class);
 
-    @Mappings({ @Mapping(source = "unitOfMeasureName", target = "unitOfMeasure.name") })
+    @Mappings({ @Mapping(source = "unitOfMeasure", target = "unitOfMeasure.name") })
     Ingredient IngredientsRequestDtoToIngredient(IngredientsRequestDto ingredientsRequestDto);
 
-    @Mappings({ @Mapping(source = "unitOfMeasure.name", target = "unitOfMeasureName") })
+    @Mappings({ @Mapping(source = "unitOfMeasure.name", target = "unitOfMeasure") })
     IngredientsResponseDto IngredientsToIngredientsResponseDto(Ingredient ingredient);
 }
