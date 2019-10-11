@@ -21,32 +21,31 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.menu;
+package de.smarthome.assistant.menu.controller;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.*;
 
-import de.smarthome.assistant.menu.persistance.model.type.UnitOfMeasures;
-import org.junit.Ignore;
+import de.smarthome.assistant.menu.component.weekmenu.WeekMenuI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
-@TestPropertySource("classpath:flyway-test.properties")
-public class DatabaseMigrationTest {
+@WebMvcTest(WeekMenuController.class)
+public class MenuControllerTest {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private MockMvc mockMvc;
+
+    @MockBean
+    private WeekMenuI weekMenu;
 
     @Test
-    public void addsTestDataAndColumnSuccessfully() throws Exception {
-        final String actual = this.jdbcTemplate.queryForObject("SELECT name FROM menu_service.menu WHERE name = 'FooBar'",
-                String.class);
-        assertThat(actual).isEqualTo("FooBar");
+    public void insertSuccessTest() {
+        assertTrue(true);
     }
 }

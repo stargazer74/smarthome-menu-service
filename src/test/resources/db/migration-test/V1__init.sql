@@ -22,21 +22,17 @@ CREATE SEQUENCE menu_service.sequence_week
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1
-    ENGINE = MyISAM
-    COLLATE = utf8_general_ci;
+    CACHE 1;
 
 CREATE TABLE IF NOT EXISTS menu_service.week
 (
-    id          BIGINT NOT NULL,
-    week_number INT    NOT NULL,
-    year        INT    NOT NULL,
-    start_date  DATE   NULL,
-    end_date    DATE   NULL,
+    id          INT         NOT NULL,
+    week_number VARCHAR(45) NOT NULL,
+    start_date  VARCHAR(45) NULL,
+    end_date    VARCHAR(45) NULL,
     PRIMARY KEY (id)
 )
-    ENGINE = MyISAM
-    COLLATE = utf8_general_ci;
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -47,18 +43,15 @@ CREATE SEQUENCE menu_service.sequence_unit_of_measure
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1
-    ENGINE = MyISAM
-    COLLATE = utf8_general_ci;
+    CACHE 1;
 
 CREATE TABLE IF NOT EXISTS menu_service.unit_of_measure
 (
-    id   BIGINT      NOT NULL,
+    id   INT         NOT NULL,
     name VARCHAR(45) NOT NULL,
     PRIMARY KEY (id)
 )
-    ENGINE = MyISAM
-    COLLATE = utf8_general_ci;
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -69,17 +62,15 @@ CREATE SEQUENCE menu_service.sequence_ingredient
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1
-    ENGINE = MyISAM
-    COLLATE = utf8_general_ci;
+    CACHE 1;
 
 CREATE TABLE IF NOT EXISTS menu_service.ingredient
 (
-    id                 BIGINT      NOT NULL,
+    id                 INT         NOT NULL,
     name               VARCHAR(45) NOT NULL,
     external_id        VARCHAR(45) NULL,
-    amount             BIGINT      NULL,
-    unit_of_measure_id BIGINT      NOT NULL,
+    amount             VARCHAR(45) NULL,
+    unit_of_measure_id INT         NOT NULL,
     PRIMARY KEY (id),
     CONSTRAINT fk_product_unit_of_measure1
         FOREIGN KEY (unit_of_measure_id)
@@ -87,8 +78,7 @@ CREATE TABLE IF NOT EXISTS menu_service.ingredient
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
 )
-    ENGINE = MyISAM
-    COLLATE = utf8_general_ci;
+    ENGINE = InnoDB;
 
 CREATE INDEX fk_product_unit_of_measure1_idx ON menu_service.ingredient (unit_of_measure_id ASC);
 
@@ -101,18 +91,15 @@ CREATE SEQUENCE menu_service.sequence_menu
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1
-    ENGINE = MyISAM
-    COLLATE = utf8_general_ci;
+    CACHE 1;
 
 CREATE TABLE IF NOT EXISTS menu_service.menu
 (
-    id   BIGINT      NOT NULL,
+    id   INT         NOT NULL,
     name VARCHAR(45) NOT NULL,
     PRIMARY KEY (id)
 )
-    ENGINE = MyISAM
-    COLLATE = utf8_general_ci;
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -120,8 +107,8 @@ CREATE TABLE IF NOT EXISTS menu_service.menu
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS menu_service.week_has_menu
 (
-    week_id BIGINT NOT NULL,
-    menu_id BIGINT NOT NULL,
+    week_id INT NOT NULL,
+    menu_id INT NOT NULL,
     PRIMARY KEY (week_id, menu_id),
     CONSTRAINT fk_week_has_menu_week
         FOREIGN KEY (week_id)
@@ -134,8 +121,7 @@ CREATE TABLE IF NOT EXISTS menu_service.week_has_menu
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
 )
-    ENGINE = MyISAM
-    COLLATE = utf8_general_ci;
+    ENGINE = InnoDB;
 
 CREATE INDEX fk_week_has_menu_menu1_idx ON menu_service.week_has_menu (menu_id ASC);
 
@@ -147,8 +133,8 @@ CREATE INDEX fk_week_has_menu_week_idx ON menu_service.week_has_menu (week_id AS
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS menu_service.menu_has_ingredient
 (
-    menu_id       BIGINT NOT NULL,
-    ingredient_id BIGINT NOT NULL,
+    menu_id       INT NOT NULL,
+    ingredient_id INT NOT NULL,
     PRIMARY KEY (menu_id, ingredient_id),
     CONSTRAINT fk_menu_has_ingredient_menu1
         FOREIGN KEY (menu_id)
@@ -161,8 +147,7 @@ CREATE TABLE IF NOT EXISTS menu_service.menu_has_ingredient
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
 )
-    ENGINE = MyISAM
-    COLLATE = utf8_general_ci;
+    ENGINE = InnoDB;
 
 CREATE INDEX fk_menu_has_ingredient_ingredient1_idx ON menu_service.menu_has_ingredient (ingredient_id ASC);
 

@@ -70,6 +70,7 @@ public class MenuComponentTest {
          * test
          */
         assertTrue(menuResponseDto.isPresent());
+        assertEquals("Grießbrei", menuResponseDto.get().getName());
 
     }
 }

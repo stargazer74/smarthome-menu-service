@@ -28,6 +28,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,17 +42,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Table(name = "unit_of_measure")
 @Getter
 @Setter
 @EqualsAndHashCode
-@Table(name = "unit_of_measure")
 public class UnitOfMeasure {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "generator.sequence_unit_of_measure", sequenceName = "sequence_unit_of_measure", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator.sequence_unit_of_measure")
     private Long id;
 
     @NotEmpty
+    @Enumerated(EnumType.STRING)
     private UnitOfMeasures name;
 
     @OneToMany(mappedBy = "unitOfMeasure")

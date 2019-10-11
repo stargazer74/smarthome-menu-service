@@ -39,14 +39,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Table(name = "menu")
 @Getter
 @Setter
 @EqualsAndHashCode
-@Table(name = "menu")
 public class Menu {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "generator.sequence_menu", sequenceName = "sequence_menu", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator.sequence_menu")
     private Long id;
 
     private String name;
@@ -55,7 +56,7 @@ public class Menu {
     private List<Week> weeks;
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinTable(name = "menu_has_product", joinColumns = {
+    @JoinTable(name = "menu_has_ingredient", joinColumns = {
             @JoinColumn(name = "menu_id", referencedColumnName = "id") }, inverseJoinColumns = {
             @JoinColumn(name = "ingredient_id", referencedColumnName = "id") })
     private List<Ingredient> ingredients;

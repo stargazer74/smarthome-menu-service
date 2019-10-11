@@ -1,5 +1,5 @@
-INSERT INTO menu_service.unit_of_measure (name) VALUES ('ESSLOEFFEL');
-INSERT INTO menu_service.unit_of_measure (name) VALUES ('KILOGRAMM');
-INSERT INTO menu_service.unit_of_measure (name) VALUES ('GRAMM');
-INSERT INTO menu_service.unit_of_measure (name) VALUES ('LITER');
-INSERT INTO menu_service.unit_of_measure (name) VALUES ('MILLILITER');
+INSERT INTO unit_of_measure (id, name) VALUES (NEXTVAL(sequence_unit_of_measure), 'ESSLOEFFEL');
+INSERT INTO unit_of_measure (id, name) VALUES (NEXTVAL(sequence_unit_of_measure), 'KILOGRAMM');
+INSERT INTO unit_of_measure (id, name) VALUES (NEXTVAL(sequence_unit_of_measure), 'GRAMM');
+INSERT INTO unit_of_measure (id, name) VALUES (NEXTVAL(sequence_unit_of_measure), 'LITER');
+INSERT INTO unit_of_measure (id, name) VALUES (NEXTVAL(sequence_unit_of_measure), 'MILLILITER');

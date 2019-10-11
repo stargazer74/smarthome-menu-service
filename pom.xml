@@ -32,7 +32,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>de.smarthome.assistant</groupId>
-    <artifactId>menu</artifactId>
+    <artifactId>menu-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>menu-service</name>
     <packaging>jar</packaging>
@@ -81,8 +81,6 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>${flyway.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
@@ -102,6 +100,7 @@
     </dependencies>
 
     <build>
+        <finalName>${artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
