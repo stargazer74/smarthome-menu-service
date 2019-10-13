@@ -56,7 +56,7 @@ public class Ingredient {
     @NotEmpty
     private String name;
 
-    private Long amount;
+    private Float amount;
 
     @Column(name = "external_id")
     private String externalId;

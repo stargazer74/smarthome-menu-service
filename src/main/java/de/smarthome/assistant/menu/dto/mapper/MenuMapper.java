@@ -34,8 +34,8 @@ public interface MenuMapper {
 
     MenuMapper INSTANCE = Mappers.getMapper(MenuMapper.class);
 
-    Menu MenuRequestDto2Menu(MenuRequestDto menuRequestDto);
+    Menu menuRequestDto2Menu(MenuRequestDto menuRequestDto);
 
-    MenuResponseDto Menu2menusResponseDto(Menu menu);
+    MenuResponseDto menu2MenusResponseDto(Menu menu);
 
 }

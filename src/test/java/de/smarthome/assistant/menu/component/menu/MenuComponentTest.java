@@ -54,7 +54,7 @@ public class MenuComponentTest {
         final IngredientsRequestDto ingredientsRequestDto = new IngredientsRequestDto();
         ingredientsRequestDto.setAmount(2.5f);
         ingredientsRequestDto.setName("Grieß");
-        ingredientsRequestDto.setUnitOfMeasure(UnitOfMeasures.LITER);
+        ingredientsRequestDto.setUnitOfMeasure(UnitOfMeasures.GRAMM);
 
         List<IngredientsRequestDto> ingredientsRequestDtos = new ArrayList<>();
         ingredientsRequestDtos.add(ingredientsRequestDto);
@@ -71,6 +71,7 @@ public class MenuComponentTest {
          */
         assertTrue(menuResponseDto.isPresent());
         assertEquals("Grießbrei", menuResponseDto.get().getName());
+        assertEquals(1, menuResponseDto.get().getIngedients().size());
 
     }
 }

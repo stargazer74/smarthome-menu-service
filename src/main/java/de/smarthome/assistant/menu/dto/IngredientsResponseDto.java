@@ -39,7 +39,7 @@ public class IngredientsResponseDto {
     @NotEmpty
     private String name;
 
-    private String amount;
+    private Float amount;
 
     private UnitOfMeasures unitOfMeasure;
 
