@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS menu_service.ingredient
     id                 BIGINT      NOT NULL,
     name               VARCHAR(45) NOT NULL,
     external_id        VARCHAR(45) NULL,
-    amount             BIGINT      NULL,
+    amount             FLOAT       NULL,
     unit_of_measure_id BIGINT      NOT NULL,
     PRIMARY KEY (id),
     CONSTRAINT fk_product_unit_of_measure1
