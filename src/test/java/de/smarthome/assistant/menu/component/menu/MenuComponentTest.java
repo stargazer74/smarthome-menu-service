@@ -71,7 +71,9 @@ public class MenuComponentTest {
          */
         assertTrue(menuResponseDto.isPresent());
         assertEquals("Grießbrei", menuResponseDto.get().getName());
-        assertEquals(1, menuResponseDto.get().getIngedients().size());
-
+        assertEquals(1, menuResponseDto.get().getIngredients().size());
+        assertEquals(UnitOfMeasures.GRAMM, menuResponseDto.get().getIngredients().get(0).getUnitOfMeasure());
+        assertEquals("Grieß", menuResponseDto.get().getIngredients().get(0).getName());
+        assertEquals(2.5f, (float) menuResponseDto.get().getIngredients().get(0).getAmount(), 0);
     }
 }

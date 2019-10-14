@@ -48,7 +48,7 @@ public class MenuComponent implements MenuI {
      */
     @Override
     public Optional<MenuResponseDto> insert(MenuRequestDto menuRequestDto) {
-        final Menu menu = menuRepository.save(MenuMapper.INSTANCE.menuRequestDto2Menu(menuRequestDto));
-        return Optional.ofNullable(MenuMapper.INSTANCE.menu2MenusResponseDto(menu));
+        return Optional.ofNullable(
+                MenuMapper.INSTANCE.menu2MenuResponseDto(menuRepository.save(MenuMapper.INSTANCE.menuRequestDto2Menu(menuRequestDto))));
     }
 }

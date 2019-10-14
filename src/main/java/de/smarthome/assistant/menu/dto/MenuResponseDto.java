@@ -39,6 +39,6 @@ public class MenuResponseDto {
     @NotEmpty
     private String name;
 
-    private List<IngredientsResponseDto> ingedients;
+    private List<IngredientsResponseDto> ingredients;
 
 }
