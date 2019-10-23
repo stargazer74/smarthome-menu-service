@@ -48,6 +48,8 @@ public interface MenuMapper {
     @Mappings({ @Mapping(source = "ingredients", target = "ingredients", qualifiedByName = "ingredientsMap") })
     MenuResponseDto menu2MenuResponseDto(Menu menu);
 
+    MenuRequestDto menuResponseDto2MenuRequestDto(MenuResponseDto menuResponseDto);
+
     @Named("ingredientsMap")
     default List<IngredientsResponseDto> ingredientsMap(List<Ingredient> ingredients) {
         return ingredients.stream().map(IngredientsMapper.INSTANCE::Ingredient2IngredientsResponseDto).collect(Collectors.toList());

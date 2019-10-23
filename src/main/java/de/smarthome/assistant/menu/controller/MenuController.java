@@ -26,6 +26,8 @@ package de.smarthome.assistant.menu.controller;
 import de.smarthome.assistant.menu.component.menu.MenuI;
 import de.smarthome.assistant.menu.dto.MenuRequestDto;
 import de.smarthome.assistant.menu.dto.MenuResponseDto;
+import de.smarthome.assistant.menu.dto.MenuListDto;
+import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,5 +56,16 @@ public class MenuController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MenuResponseDto> insert(@Valid @RequestBody MenuRequestDto menuRequestDto) {
         return this.menu.insert(menuRequestDto).map(a -> ResponseEntity.ok().body(a)).orElseGet(() -> ResponseEntity.badRequest().build());
+    }
+
+    /**
+     * Returns a WeekMenuListDto with a list of all menus stored in the database.
+     *
+     * @return ResponseEntity<WeekMenuListDto>
+     */
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public ResponseEntity<MenuListDto> list() {
+        final Optional<MenuListDto> allMenus = this.menu.getAllMenus();
+        return allMenus.map(a -> ResponseEntity.ok().body(a)).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

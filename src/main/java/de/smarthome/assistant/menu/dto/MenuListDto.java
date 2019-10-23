@@ -21,35 +21,15 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.menu.controller;
+package de.smarthome.assistant.menu.dto;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
-import de.smarthome.assistant.menu.component.weekmenu.WeekMenuI;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
+@Getter
+@Setter
+public class MenuListDto {
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(WeekMenuController.class)
-public class WeekMenuControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
-    private WeekMenuI weekMenuI;
-
-    @Test
-    public void getAllMenusSuccessTest() throws Exception {
-        mockMvc.perform(
-                get("/list").characterEncoding("UTF-8").contentType(MediaType.APPLICATION_JSON)
-        ).andExpect(status().is(404));
-    }
+    private List<MenuResponseDto> weekMenuDtos;
 }

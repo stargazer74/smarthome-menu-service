@@ -32,9 +32,12 @@ import lombok.Setter;
 @Setter
 public class MenuRequestDto {
 
+    private Long id;
+
     @NotEmpty
     private String name;
 
+    @NotEmpty
     private List<IngredientsRequestDto> ingredients;
 
 }

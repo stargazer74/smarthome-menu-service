@@ -24,28 +24,69 @@
 package de.smarthome.assistant.menu.controller;
 
 import static org.junit.Assert.*;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import de.smarthome.assistant.menu.component.menu.MenuI;
 import de.smarthome.assistant.menu.component.weekmenu.WeekMenuI;
+import de.smarthome.assistant.menu.dto.MenuListDto;
+import de.smarthome.assistant.menu.dto.MenuResponseDto;
+import de.smarthome.assistant.menu.persistance.MenuResponseDtoBuilder;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(WeekMenuController.class)
+@WebMvcTest(MenuController.class)
 public class MenuControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private WeekMenuI weekMenu;
+    private MenuI menu;
+
+    private MenuListDto menuListDto;
+
+    @Before
+    public void setUp() {
+        this.menuListDto = new MenuListDto();
+        final MenuResponseDto menuResponseDto_1 = new MenuResponseDtoBuilder.Builder().asGriessbrei().build();
+        final MenuResponseDto menuResponseDto_2 = new MenuResponseDtoBuilder.Builder().asKartoffelSuppe().build();
+        List<MenuResponseDto> responseDtos = new ArrayList<>();
+        responseDtos.add(menuResponseDto_1);
+        responseDtos.add(menuResponseDto_2);
+        menuListDto.setWeekMenuDtos(responseDtos);
+    }
 
     @Test
     public void insertSuccessTest() {
         assertTrue(true);
+    }
+
+    @Test
+    public void getAllMenusSuccessTest() throws Exception {
+        /*
+         * prepare
+         */
+        given(menu.getAllMenus()).willReturn(Optional.of(this.menuListDto));
+
+        /*
+         * test
+         */
+        mockMvc.perform(get("/menu/list").characterEncoding("UTF-8").contentType(MediaType.APPLICATION_JSON)).andExpect(status().is(200))
+                .andExpect(jsonPath("$.weekMenuDtos[0].name").value("Grießbrei")).
+                andExpect(jsonPath("$.weekMenuDtos[1].name").value("Kartoffelsuppe"));
     }
 }

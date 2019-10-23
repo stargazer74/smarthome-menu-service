@@ -25,10 +25,13 @@ package de.smarthome.assistant.menu.component.menu;
 
 import de.smarthome.assistant.menu.dto.MenuRequestDto;
 import de.smarthome.assistant.menu.dto.MenuResponseDto;
+import de.smarthome.assistant.menu.dto.MenuListDto;
 import java.util.Optional;
 
 public interface MenuI {
 
     Optional<MenuResponseDto> insert(MenuRequestDto menuRequestDto);
+
+    Optional<MenuListDto> getAllMenus();
 
 }

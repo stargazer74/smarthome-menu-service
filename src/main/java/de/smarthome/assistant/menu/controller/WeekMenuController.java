@@ -24,10 +24,7 @@
 package de.smarthome.assistant.menu.controller;
 
 import de.smarthome.assistant.menu.component.weekmenu.WeekMenuI;
-import de.smarthome.assistant.menu.dto.WeekMenuListDto;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -40,13 +37,5 @@ public class WeekMenuController {
         this.weekMenuI = weekMenuI;
     }
 
-    /**
-     * Returns a WeekMenuListDto with a list of all menus stored in the database.
-     *
-     * @return ResponseEntity<WeekMenuListDto>
-     */
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public ResponseEntity<WeekMenuListDto> list() {
-        return this.weekMenuI.getAllMenus().map(a -> ResponseEntity.ok().body(a)).orElseGet(() -> ResponseEntity.notFound().build());
-    }
+
 }

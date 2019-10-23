@@ -23,15 +23,15 @@
 
 package de.smarthome.assistant.menu.component.menu;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import de.smarthome.assistant.menu.dto.IngredientsRequestDto;
 import de.smarthome.assistant.menu.dto.MenuRequestDto;
 import de.smarthome.assistant.menu.dto.MenuResponseDto;
+import de.smarthome.assistant.menu.dto.mapper.MenuMapper;
+import de.smarthome.assistant.menu.persistance.MenuResponseDtoBuilder;
 import de.smarthome.assistant.menu.persistance.model.type.UnitOfMeasures;
 import de.smarthome.assistant.menu.persistance.repository.MenuRepository;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,29 +51,20 @@ public class MenuComponentTest {
         /*
          * prepare
          */
-        final IngredientsRequestDto ingredientsRequestDto = new IngredientsRequestDto();
-        ingredientsRequestDto.setAmount(2.5f);
-        ingredientsRequestDto.setName("Grieß");
-        ingredientsRequestDto.setUnitOfMeasure(UnitOfMeasures.GRAMM);
-
-        List<IngredientsRequestDto> ingredientsRequestDtos = new ArrayList<>();
-        ingredientsRequestDtos.add(ingredientsRequestDto);
-
-        final MenuRequestDto menuRequestDto = new MenuRequestDto();
-        menuRequestDto.setIngredients(ingredientsRequestDtos);
-        menuRequestDto.setName("Grießbrei");
+        final MenuResponseDto menuResponseDto = new MenuResponseDtoBuilder.Builder().asGriessbrei().build();
+        final MenuRequestDto menuRequestDto = MenuMapper.INSTANCE.menuResponseDto2MenuRequestDto(menuResponseDto);
 
         final MenuComponent menuComponent = new MenuComponent(this.menuRepository);
-        final Optional<MenuResponseDto> menuResponseDto = menuComponent.insert(menuRequestDto);
+        final Optional<MenuResponseDto> menuResponse = menuComponent.insert(menuRequestDto);
 
         /*
          * test
          */
-        assertTrue(menuResponseDto.isPresent());
-        assertEquals("Grießbrei", menuResponseDto.get().getName());
-        assertEquals(1, menuResponseDto.get().getIngredients().size());
-        assertEquals(UnitOfMeasures.GRAMM, menuResponseDto.get().getIngredients().get(0).getUnitOfMeasure());
-        assertEquals("Grieß", menuResponseDto.get().getIngredients().get(0).getName());
-        assertEquals(2.5f, (float) menuResponseDto.get().getIngredients().get(0).getAmount(), 0);
+        assertTrue(menuResponse.isPresent());
+        assertEquals("Grießbrei", menuResponse.get().getName());
+        assertEquals(2, menuResponse.get().getIngredients().size());
+        assertEquals(UnitOfMeasures.GRAMM, menuResponse.get().getIngredients().get(0).getUnitOfMeasure());
+        assertEquals("Grieß", menuResponse.get().getIngredients().get(0).getName());
+        assertEquals(200.5f, (float) menuResponse.get().getIngredients().get(0).getAmount(), 0);
     }
 }

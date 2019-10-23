@@ -23,11 +23,15 @@
 
 package de.smarthome.assistant.menu.component.menu;
 
+import de.smarthome.assistant.menu.dto.IngredientsResponseDto;
 import de.smarthome.assistant.menu.dto.MenuRequestDto;
 import de.smarthome.assistant.menu.dto.MenuResponseDto;
+import de.smarthome.assistant.menu.dto.MenuListDto;
 import de.smarthome.assistant.menu.dto.mapper.MenuMapper;
-import de.smarthome.assistant.menu.persistance.model.Menu;
+import de.smarthome.assistant.menu.persistance.model.type.UnitOfMeasures;
 import de.smarthome.assistant.menu.persistance.repository.MenuRepository;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
@@ -50,5 +54,70 @@ public class MenuComponent implements MenuI {
     public Optional<MenuResponseDto> insert(MenuRequestDto menuRequestDto) {
         return Optional.ofNullable(
                 MenuMapper.INSTANCE.menu2MenuResponseDto(menuRepository.save(MenuMapper.INSTANCE.menuRequestDto2Menu(menuRequestDto))));
+    }
+
+    /**
+     * Returns a Optional<WeekMenuListDto> with a list of all menus in the database.
+     *
+     * @return Optional<WeekMenuListDto>
+     */
+    public Optional<MenuListDto> getAllMenus() {
+        return Optional.of(mockData());
+
+        //        final List<MenuResponseDto> weekMenuDtos = weekMenuRepository.findAll().stream().map(WeekMenuMapper.INSTANCE::menu2MenuResponseDto)
+        //                .collect(Collectors.toList());
+        //
+        //        if(weekMenuDtos.isEmpty())
+        //            return Optional.empty();
+        //
+        //        final WeekMenuListDto weekMenuListDto = new WeekMenuListDto();
+        //        weekMenuListDto.setWeekMenuDtos(weekMenuDtos);
+        //        return Optional.of(weekMenuListDto);
+    }
+
+    private MenuListDto mockData() {
+        // create demo data
+        final MenuResponseDto weekMenuResponseDto_1 = new MenuResponseDto();
+        weekMenuResponseDto_1.setId(1L);
+        weekMenuResponseDto_1.setName("Schweinefleisch mit Klößen");
+        final IngredientsResponseDto ingredientResponse_1 = new IngredientsResponseDto();
+        ingredientResponse_1.setId(1L);
+        ingredientResponse_1.setName("Kartoffeln");
+        ingredientResponse_1.setAmount(100f);
+        ingredientResponse_1.setUnitOfMeasure(UnitOfMeasures.ESSLOEFFEL);
+        final IngredientsResponseDto ingredientResponse_2 = new IngredientsResponseDto();
+        ingredientResponse_2.setId(2L);
+        ingredientResponse_2.setName("Rinderfleisch");
+        ingredientResponse_2.setAmount(500f);
+        ingredientResponse_2.setUnitOfMeasure(UnitOfMeasures.LITER);
+        List<IngredientsResponseDto> ingredients_1 = new ArrayList<>();
+        ingredients_1.add(ingredientResponse_1);
+        ingredients_1.add(ingredientResponse_2);
+        weekMenuResponseDto_1.setIngredients(ingredients_1);
+
+        final MenuResponseDto weekMenuResponseDto_2 = new MenuResponseDto();
+        weekMenuResponseDto_2.setId(2L);
+        weekMenuResponseDto_2.setName("Grießbrei");
+        final IngredientsResponseDto ingredientResponse_3 = new IngredientsResponseDto();
+        ingredientResponse_3.setId(3L);
+        ingredientResponse_3.setName("Grieß");
+        ingredientResponse_3.setAmount(500f);
+        ingredientResponse_3.setUnitOfMeasure(UnitOfMeasures.LITER);
+        final IngredientsResponseDto ingredientResponse_4 = new IngredientsResponseDto();
+        ingredientResponse_4.setId(4L);
+        ingredientResponse_4.setName("Zucker");
+        ingredientResponse_4.setAmount(2.5f);
+        ingredientResponse_4.setUnitOfMeasure(UnitOfMeasures.KILOGRAMM);
+        List<IngredientsResponseDto> ingredients_2 = new ArrayList<>();
+        ingredients_2.add(ingredientResponse_3);
+        ingredients_2.add(ingredientResponse_4);
+        weekMenuResponseDto_2.setIngredients(ingredients_2);
+
+        List<MenuResponseDto> weekMenuResponseDtos = new ArrayList<>();
+        weekMenuResponseDtos.add(weekMenuResponseDto_1);
+        weekMenuResponseDtos.add(weekMenuResponseDto_2);
+        MenuListDto weekMenuListResponseDto = new MenuListDto();
+        weekMenuListResponseDto.setWeekMenuDtos(weekMenuResponseDtos);
+        return weekMenuListResponseDto;
     }
 }

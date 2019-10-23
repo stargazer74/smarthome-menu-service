@@ -23,11 +23,5 @@
 
 package de.smarthome.assistant.menu.component.weekmenu;
 
-import de.smarthome.assistant.menu.dto.WeekMenuListDto;
-import java.util.Optional;
-
 public interface WeekMenuI {
-
-    Optional<WeekMenuListDto> getAllMenus();
-
 }
