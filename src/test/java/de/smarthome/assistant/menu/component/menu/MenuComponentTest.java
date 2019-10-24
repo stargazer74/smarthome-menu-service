@@ -26,10 +26,12 @@ package de.smarthome.assistant.menu.component.menu;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import de.smarthome.assistant.menu.dto.MenuListDto;
 import de.smarthome.assistant.menu.dto.MenuRequestDto;
 import de.smarthome.assistant.menu.dto.MenuResponseDto;
 import de.smarthome.assistant.menu.dto.mapper.MenuMapper;
 import de.smarthome.assistant.menu.persistance.MenuResponseDtoBuilder;
+import de.smarthome.assistant.menu.persistance.model.Menu;
 import de.smarthome.assistant.menu.persistance.model.type.UnitOfMeasures;
 import de.smarthome.assistant.menu.persistance.repository.MenuRepository;
 import java.util.Optional;
@@ -54,6 +56,9 @@ public class MenuComponentTest {
         final MenuResponseDto menuResponseDto = new MenuResponseDtoBuilder.Builder().asGriessbrei().build();
         final MenuRequestDto menuRequestDto = MenuMapper.INSTANCE.menuResponseDto2MenuRequestDto(menuResponseDto);
 
+        /*
+         * call
+         */
         final MenuComponent menuComponent = new MenuComponent(this.menuRepository);
         final Optional<MenuResponseDto> menuResponse = menuComponent.insert(menuRequestDto);
 
@@ -65,6 +70,31 @@ public class MenuComponentTest {
         assertEquals(2, menuResponse.get().getIngredients().size());
         assertEquals(UnitOfMeasures.GRAMM, menuResponse.get().getIngredients().get(0).getUnitOfMeasure());
         assertEquals("Grieß", menuResponse.get().getIngredients().get(0).getName());
-        assertEquals(200.5f, (float) menuResponse.get().getIngredients().get(0).getAmount(), 0);
+        assertEquals(200.5f, menuResponse.get().getIngredients().get(0).getAmount(), 0);
+    }
+
+    @Test
+    public void getAllMenusSuccessTest() {
+        /*
+         * prepare
+         */
+        final MenuResponseDto menuResponseDto = new MenuResponseDtoBuilder.Builder().asGriessbrei().build();
+        final MenuRequestDto menuRequestDto = MenuMapper.INSTANCE.menuResponseDto2MenuRequestDto(menuResponseDto);
+        final Menu menu = MenuMapper.INSTANCE.menuRequestDto2Menu(menuRequestDto);
+        this.menuRepository.save(menu);
+        this.menuRepository.flush();
+
+        /*
+         * call
+         */
+        final MenuComponent menuComponent = new MenuComponent(this.menuRepository);
+        final Optional<MenuListDto> allMenus = menuComponent.getAllMenus();
+
+        /*
+         * test
+         */
+        assertTrue(allMenus.isPresent());
+        assertEquals(1, allMenus.get().getWeekMenuDtos().size());
+        assertEquals("Grießbrei", allMenus.get().getWeekMenuDtos().get(0).getName());
     }
 }

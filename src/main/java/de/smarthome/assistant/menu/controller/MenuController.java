@@ -52,7 +52,7 @@ public class MenuController {
      *
      * @param menuRequestDto the menu dto
      */
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MenuResponseDto> insert(@Valid @RequestBody MenuRequestDto menuRequestDto) {
         return this.menu.insert(menuRequestDto).map(a -> ResponseEntity.ok().body(a)).orElseGet(() -> ResponseEntity.badRequest().build());

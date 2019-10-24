@@ -25,6 +25,7 @@ package de.smarthome.assistant.menu.persistance.model;
 
 import de.smarthome.assistant.menu.persistance.model.type.UnitOfMeasures;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -35,6 +36,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -51,8 +53,8 @@ public class UnitOfMeasure {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generator.sequence_unit_of_measure")
     private Long id;
 
-    @NotEmpty
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private UnitOfMeasures name;
 
     @OneToMany(mappedBy = "unitOfMeasure")
