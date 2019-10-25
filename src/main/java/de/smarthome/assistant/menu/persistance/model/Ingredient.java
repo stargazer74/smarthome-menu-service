@@ -24,18 +24,7 @@
 package de.smarthome.assistant.menu.persistance.model;
 
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -57,19 +46,13 @@ public class Ingredient {
     @Column(nullable = false, unique = true)
     private String name;
 
-    private Float amount;
-
     @Column(name = "external_id")
     private String externalId;
 
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinTable(name = "menu_has_ingredient", joinColumns = {
-            @JoinColumn(name = "ingredient_id", referencedColumnName = "id") }, inverseJoinColumns = {
-            @JoinColumn(name = "menu_id", referencedColumnName = "id") })
-    private List<Menu> menus;
+    @OneToMany(mappedBy = "menu", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    private List<MenuIngredient> menus;
 
-
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinColumn(name = "unit_of_measure_id", nullable = false)
     private UnitOfMeasure unitOfMeasure;
 

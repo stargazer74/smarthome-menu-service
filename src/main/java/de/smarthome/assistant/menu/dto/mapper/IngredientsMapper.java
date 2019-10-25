@@ -26,6 +26,7 @@ package de.smarthome.assistant.menu.dto.mapper;
 import de.smarthome.assistant.menu.dto.IngredientsRequestDto;
 import de.smarthome.assistant.menu.dto.IngredientsResponseDto;
 import de.smarthome.assistant.menu.persistance.model.Ingredient;
+import de.smarthome.assistant.menu.persistance.model.MenuIngredient;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -36,9 +37,11 @@ public interface IngredientsMapper {
 
     IngredientsMapper INSTANCE = Mappers.getMapper(IngredientsMapper.class);
 
-    @Mappings({ @Mapping(source = "unitOfMeasure", target = "unitOfMeasure.name") })
-    Ingredient ingredientsRequestDto2Ingredient(IngredientsRequestDto ingredientsRequestDto);
+    @Mappings({ @Mapping(source = "unitOfMeasure", target = "ingredient.unitOfMeasure.name"),
+            @Mapping(source = "id", target = "id.ingredientId"), @Mapping(source = "name", target = "ingredient.name") })
+    MenuIngredient ingredientsRequestDto2Ingredient(IngredientsRequestDto ingredientsRequestDto);
 
-    @Mappings({ @Mapping(source = "unitOfMeasure.name", target = "unitOfMeasure") })
-    IngredientsResponseDto Ingredient2IngredientsResponseDto(Ingredient ingredient);
+    @Mappings({ @Mapping(source = "ingredient.unitOfMeasure.name", target = "unitOfMeasure"),
+            @Mapping(source = "id.ingredientId", target = "id") })
+    IngredientsResponseDto ingredient2IngredientsResponseDto(MenuIngredient ingredient);
 }

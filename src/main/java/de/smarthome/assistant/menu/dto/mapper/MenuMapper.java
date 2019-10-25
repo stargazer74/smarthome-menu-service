@@ -31,6 +31,8 @@ import de.smarthome.assistant.menu.persistance.model.Ingredient;
 import de.smarthome.assistant.menu.persistance.model.Menu;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import de.smarthome.assistant.menu.persistance.model.MenuIngredient;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -51,12 +53,12 @@ public interface MenuMapper {
     MenuRequestDto menuResponseDto2MenuRequestDto(MenuResponseDto menuResponseDto);
 
     @Named("ingredientsMap")
-    default List<IngredientsResponseDto> ingredientsMap(List<Ingredient> ingredients) {
-        return ingredients.stream().map(IngredientsMapper.INSTANCE::Ingredient2IngredientsResponseDto).collect(Collectors.toList());
+    default List<IngredientsResponseDto> ingredientsMap(List<MenuIngredient> ingredients) {
+        return ingredients.stream().map(IngredientsMapper.INSTANCE::ingredient2IngredientsResponseDto).collect(Collectors.toList());
     }
 
     @Named("ingredientRequestMap")
-    default List<Ingredient> ingredientRequestMap(List<IngredientsRequestDto> ingredientsRequestDtos) {
+    default List<MenuIngredient> ingredientRequestMap(List<IngredientsRequestDto> ingredientsRequestDtos) {
         return ingredientsRequestDtos.stream().map(IngredientsMapper.INSTANCE::ingredientsRequestDto2Ingredient)
                 .collect(Collectors.toList());
     }
