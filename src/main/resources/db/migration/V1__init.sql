@@ -78,7 +78,6 @@ CREATE TABLE IF NOT EXISTS menu_service.ingredient
     id                 BIGINT      NOT NULL,
     name               VARCHAR(45) NOT NULL,
     external_id        VARCHAR(45) NULL,
-    amount             FLOAT       NULL,
     unit_of_measure_id BIGINT      NOT NULL,
     PRIMARY KEY (id),
     CONSTRAINT fk_product_unit_of_measure1
@@ -149,6 +148,7 @@ CREATE TABLE IF NOT EXISTS menu_service.menu_has_ingredient
 (
     menu_id       BIGINT NOT NULL,
     ingredient_id BIGINT NOT NULL,
+    amount        FLOAT  NULL,
     PRIMARY KEY (menu_id, ingredient_id),
     CONSTRAINT fk_menu_has_ingredient_menu1
         FOREIGN KEY (menu_id)
