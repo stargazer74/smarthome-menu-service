@@ -23,26 +23,30 @@
 
 package de.smarthome.assistant.menu.component.menu;
 
-import de.smarthome.assistant.menu.dto.IngredientsResponseDto;
 import de.smarthome.assistant.menu.dto.MenuRequestDto;
 import de.smarthome.assistant.menu.dto.MenuResponseDto;
 import de.smarthome.assistant.menu.dto.MenuListDto;
 import de.smarthome.assistant.menu.dto.mapper.MenuMapper;
-import de.smarthome.assistant.menu.persistance.model.type.UnitOfMeasures;
+import de.smarthome.assistant.menu.persistance.model.Ingredient;
+import de.smarthome.assistant.menu.persistance.repository.IngredientRepository;
 import de.smarthome.assistant.menu.persistance.repository.MenuRepository;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@Transactional
 public class MenuComponent implements MenuI {
 
     private final MenuRepository menuRepository;
 
-    public MenuComponent(MenuRepository menuRepository) {
+    private final IngredientRepository ingredientRepository;
+
+    public MenuComponent(MenuRepository menuRepository, IngredientRepository ingredientRepository) {
         this.menuRepository = menuRepository;
+        this.ingredientRepository = ingredientRepository;
     }
 
     /**
@@ -53,6 +57,11 @@ public class MenuComponent implements MenuI {
      */
     @Override
     public Optional<MenuResponseDto> insert(MenuRequestDto menuRequestDto) {
+        // find ingredients with existing names to prevent constraint violation exception
+        menuRequestDto.getIngredients().forEach(a -> {
+            final Optional<Ingredient> ingredient = this.ingredientRepository.findByName(a.getName());
+            ingredient.ifPresent(value -> a.setId(value.getId()));
+        });
         return Optional.ofNullable(
                 MenuMapper.INSTANCE.menu2MenuResponseDto(menuRepository.save(MenuMapper.INSTANCE.menuRequestDto2Menu(menuRequestDto))));
     }
@@ -70,7 +79,7 @@ public class MenuComponent implements MenuI {
             return Optional.empty();
 
         final MenuListDto weekMenuListDto = new MenuListDto();
-        weekMenuListDto.setWeekMenuDtos(weekMenuDtos);
+        weekMenuListDto.setMenuDtos(weekMenuDtos);
         return Optional.of(weekMenuListDto);
     }
 }

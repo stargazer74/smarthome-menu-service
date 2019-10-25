@@ -33,6 +33,7 @@ import de.smarthome.assistant.menu.dto.mapper.MenuMapper;
 import de.smarthome.assistant.menu.persistance.MenuResponseDtoBuilder;
 import de.smarthome.assistant.menu.persistance.model.Menu;
 import de.smarthome.assistant.menu.persistance.model.type.UnitOfMeasures;
+import de.smarthome.assistant.menu.persistance.repository.IngredientRepository;
 import de.smarthome.assistant.menu.persistance.repository.MenuRepository;
 import java.util.Optional;
 import org.junit.Test;
@@ -48,6 +49,9 @@ public class MenuComponentTest {
     @Autowired
     private MenuRepository menuRepository;
 
+    @Autowired
+    private IngredientRepository ingredientRepository;
+
     @Test
     public void insertSuccessTest() {
         /*
@@ -59,7 +63,7 @@ public class MenuComponentTest {
         /*
          * call
          */
-        final MenuComponent menuComponent = new MenuComponent(this.menuRepository);
+        final MenuComponent menuComponent = new MenuComponent(this.menuRepository, ingredientRepository);
         final Optional<MenuResponseDto> menuResponse = menuComponent.insert(menuRequestDto);
 
         /*
@@ -87,14 +91,14 @@ public class MenuComponentTest {
         /*
          * call
          */
-        final MenuComponent menuComponent = new MenuComponent(this.menuRepository);
+        final MenuComponent menuComponent = new MenuComponent(this.menuRepository, ingredientRepository);
         final Optional<MenuListDto> allMenus = menuComponent.getAllMenus();
 
         /*
          * test
          */
         assertTrue(allMenus.isPresent());
-        assertEquals(1, allMenus.get().getWeekMenuDtos().size());
-        assertEquals("Grießbrei", allMenus.get().getWeekMenuDtos().get(0).getName());
+        assertEquals(1, allMenus.get().getMenuDtos().size());
+        assertEquals("Grießbrei", allMenus.get().getMenuDtos().get(0).getName());
     }
 }

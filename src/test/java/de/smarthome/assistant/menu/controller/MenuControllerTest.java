@@ -30,7 +30,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import de.smarthome.assistant.menu.component.menu.MenuI;
-import de.smarthome.assistant.menu.component.weekmenu.WeekMenuI;
 import de.smarthome.assistant.menu.dto.MenuListDto;
 import de.smarthome.assistant.menu.dto.MenuResponseDto;
 import de.smarthome.assistant.menu.persistance.MenuResponseDtoBuilder;
@@ -67,7 +66,7 @@ public class MenuControllerTest {
         List<MenuResponseDto> responseDtos = new ArrayList<>();
         responseDtos.add(menuResponseDto_1);
         responseDtos.add(menuResponseDto_2);
-        menuListDto.setWeekMenuDtos(responseDtos);
+        menuListDto.setMenuDtos(responseDtos);
     }
 
     @Test
@@ -86,7 +85,7 @@ public class MenuControllerTest {
          * test
          */
         mockMvc.perform(get("/menu/list").characterEncoding("UTF-8").contentType(MediaType.APPLICATION_JSON)).andExpect(status().is(200))
-                .andExpect(jsonPath("$.weekMenuDtos[0].name").value("Grießbrei")).
-                andExpect(jsonPath("$.weekMenuDtos[1].name").value("Kartoffelsuppe"));
+                .andExpect(jsonPath("$.menuDtos[0].name").value("Grießbrei")).
+                andExpect(jsonPath("$.menuDtos[1].name").value("Kartoffelsuppe"));
     }
 }

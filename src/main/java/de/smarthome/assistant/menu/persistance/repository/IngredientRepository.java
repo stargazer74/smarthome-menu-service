@@ -21,15 +21,16 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.menu.dto;
+package de.smarthome.assistant.menu.persistance.repository;
 
-import java.util.List;
-import lombok.Getter;
-import lombok.Setter;
+import de.smarthome.assistant.menu.persistance.model.Ingredient;
+import java.util.Optional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-@Getter
-@Setter
-public class MenuListDto {
+@Repository
+public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
 
-    private List<MenuResponseDto> menuDtos;
+    Optional<Ingredient> findByName(String name);
+
 }

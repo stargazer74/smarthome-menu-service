@@ -54,6 +54,7 @@ public class Ingredient {
     private Long id;
 
     @NotEmpty
+    @Column(nullable = false, unique = true)
     private String name;
 
     private Float amount;
