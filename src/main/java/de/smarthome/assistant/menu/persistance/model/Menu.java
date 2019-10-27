@@ -47,7 +47,7 @@ public class Menu {
     @ManyToMany(mappedBy = "menus", cascade = { CascadeType.ALL })
     private List<Week> weeks;
 
-    @OneToMany(mappedBy = "ingredient", cascade = { CascadeType.ALL }, orphanRemoval = true)
+    @OneToMany(mappedBy = "ingredient", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
     private List<MenuIngredient> ingredients;
 
 }

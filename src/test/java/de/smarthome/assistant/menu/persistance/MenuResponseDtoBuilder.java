@@ -64,18 +64,18 @@ public class MenuResponseDtoBuilder {
             final IngredientsResponseDto ingredient_1 = new IngredientsResponseDto();
             ingredient_1.setName("Grieß");
             ingredient_1.setAmount(200.5f);
-            ingredient_1.setId(1L);
+//            ingredient_1.setId(1L);
             ingredient_1.setUnitOfMeasure(UnitOfMeasures.GRAMM);
             final IngredientsResponseDto ingredient_2 = new IngredientsResponseDto();
             ingredient_2.setName("Milch");
             ingredient_2.setAmount(1f);
-            ingredient_2.setId(2L);
+//            ingredient_2.setId(2L);
             ingredient_2.setUnitOfMeasure(UnitOfMeasures.LITER);
             List<IngredientsResponseDto> ingredients = new ArrayList<>();
             ingredients.add(ingredient_1);
             ingredients.add(ingredient_2);
             this.withIngredients(ingredients);
-            this.withId(1L);
+//            this.withId(1L);
             this.withName("Grießbrei");
             return this;
         }

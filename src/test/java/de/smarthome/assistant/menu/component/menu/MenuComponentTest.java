@@ -32,9 +32,12 @@ import de.smarthome.assistant.menu.dto.MenuResponseDto;
 import de.smarthome.assistant.menu.dto.mapper.MenuMapper;
 import de.smarthome.assistant.menu.persistance.MenuResponseDtoBuilder;
 import de.smarthome.assistant.menu.persistance.model.Menu;
+import de.smarthome.assistant.menu.persistance.model.MenuIngredient;
 import de.smarthome.assistant.menu.persistance.model.type.UnitOfMeasures;
 import de.smarthome.assistant.menu.persistance.repository.IngredientRepository;
+import de.smarthome.assistant.menu.persistance.repository.MenuIngredientRepository;
 import de.smarthome.assistant.menu.persistance.repository.MenuRepository;
+import java.util.List;
 import java.util.Optional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,6 +54,9 @@ public class MenuComponentTest {
 
     @Autowired
     private IngredientRepository ingredientRepository;
+
+    @Autowired
+    private MenuIngredientRepository menuIngredientRepository;
 
     @Test
     public void insertSuccessTest() {
@@ -85,6 +91,16 @@ public class MenuComponentTest {
         final MenuResponseDto menuResponseDto = new MenuResponseDtoBuilder.Builder().asGriessbrei().build();
         final MenuRequestDto menuRequestDto = MenuMapper.INSTANCE.menuResponseDto2MenuRequestDto(menuResponseDto);
         final Menu menu = MenuMapper.INSTANCE.menuRequestDto2Menu(menuRequestDto);
+        menu.setIngredients(List.of(menu.getIngredients().get(0)));
+
+        MenuIngredient menuIngredient = new MenuIngredient();
+        menuIngredient.setAmount(200.3f);
+        menuIngredient.setMenu(menu);
+        menuIngredient.setIngredient(menu.getIngredients().get(0).getIngredient());
+        menuIngredientRepository.save(menuIngredient);
+        menuIngredientRepository.flush();
+
+
         this.menuRepository.save(menu);
         this.menuRepository.flush();
 
