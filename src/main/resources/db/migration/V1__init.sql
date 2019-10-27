@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS menu_service.menu_has_ingredient
 (
     menu_id       BIGINT NOT NULL,
     ingredient_id BIGINT NOT NULL,
-    amount        FLOAT  NULL,
+    amount        FLOAT  NOT NULL,
     PRIMARY KEY (menu_id, ingredient_id),
     CONSTRAINT fk_menu_has_ingredient_menu1
         FOREIGN KEY (menu_id)

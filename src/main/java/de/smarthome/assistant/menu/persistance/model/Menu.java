@@ -44,10 +44,10 @@ public class Menu {
 
     private String name;
 
-    @ManyToMany(mappedBy = "menus", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @ManyToMany(mappedBy = "menus", cascade = { CascadeType.ALL })
     private List<Week> weeks;
 
-    @OneToMany(mappedBy = "ingredient", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @OneToMany(mappedBy = "ingredient", cascade = { CascadeType.ALL }, orphanRemoval = true)
     private List<MenuIngredient> ingredients;
 
 }

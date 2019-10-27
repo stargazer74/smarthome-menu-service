@@ -1,6 +1,7 @@
 package de.smarthome.assistant.menu.persistance.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -32,5 +33,6 @@ public class MenuIngredient {
     @JoinColumn(name = "ingredient_id")
     private Ingredient ingredient;
 
+    @Column(nullable = false)
     private Float amount;
 }
