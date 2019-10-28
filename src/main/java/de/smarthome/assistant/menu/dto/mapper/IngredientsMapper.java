@@ -42,6 +42,6 @@ public interface IngredientsMapper {
     MenuIngredient ingredientsRequestDto2Ingredient(IngredientsRequestDto ingredientsRequestDto);
 
     @Mappings({ @Mapping(source = "ingredient.unitOfMeasure.name", target = "unitOfMeasure"),
-            @Mapping(source = "id.ingredientId", target = "id") })
+            @Mapping(source = "id.ingredientId", target = "id"), @Mapping(source = "ingredient.name", target = "name") })
     IngredientsResponseDto ingredient2IngredientsResponseDto(MenuIngredient ingredient);
 }

@@ -28,6 +28,7 @@ import de.smarthome.assistant.menu.dto.MenuResponseDto;
 import de.smarthome.assistant.menu.dto.MenuListDto;
 import de.smarthome.assistant.menu.dto.mapper.MenuMapper;
 import de.smarthome.assistant.menu.persistance.model.Ingredient;
+import de.smarthome.assistant.menu.persistance.model.Menu;
 import de.smarthome.assistant.menu.persistance.repository.IngredientRepository;
 import de.smarthome.assistant.menu.persistance.repository.MenuRepository;
 import java.util.List;
@@ -62,8 +63,10 @@ public class MenuComponent implements MenuI {
             final Optional<Ingredient> ingredient = this.ingredientRepository.findByName(a.getName());
             ingredient.ifPresent(value -> a.setId(value.getId()));
         });
-        return Optional.ofNullable(
-                MenuMapper.INSTANCE.menu2MenuResponseDto(menuRepository.save(MenuMapper.INSTANCE.menuRequestDto2Menu(menuRequestDto))));
+        final Menu menu = MenuMapper.INSTANCE.menuRequestDto2Menu(menuRequestDto);
+        Menu savedMenu = menuRepository.save(menu);
+        MenuResponseDto returnValue = MenuMapper.INSTANCE.menu2MenuResponseDto(savedMenu);
+        return Optional.ofNullable(returnValue);
     }
 
     /**
