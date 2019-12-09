@@ -64,6 +64,7 @@ public class MenuComponent implements MenuI {
             ingredient.ifPresent(value -> a.setId(value.getId()));
         });
         final Menu menu = MenuMapper.INSTANCE.menuRequestDto2Menu(menuRequestDto);
+        menu.getIngredients().forEach(a -> a.setMenu(menu));
         Menu savedMenu = menuRepository.save(menu);
         MenuResponseDto returnValue = MenuMapper.INSTANCE.menu2MenuResponseDto(savedMenu);
         return Optional.ofNullable(returnValue);

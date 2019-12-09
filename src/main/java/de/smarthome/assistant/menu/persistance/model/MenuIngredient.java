@@ -23,13 +23,13 @@ public class MenuIngredient {
     @EmbeddedId
     private MenuIngredientKey id;
 
-    @ManyToOne
-    @MapsId("menu_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @MapsId("menuId")
     @JoinColumn(name = "menu_id")
     private Menu menu;
 
-    @ManyToOne
-    @MapsId("ingredient_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @MapsId("ingredientId")
     @JoinColumn(name = "ingredient_id")
     private Ingredient ingredient;
 

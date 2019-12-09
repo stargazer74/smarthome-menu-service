@@ -49,10 +49,10 @@ public class Ingredient {
     @Column(name = "external_id")
     private String externalId;
 
-    @OneToMany(mappedBy = "ingredient")
+    @OneToMany(mappedBy = "ingredient", orphanRemoval = true, cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private List<MenuIngredient> menus;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "unit_of_measure_id", nullable = false)
     private UnitOfMeasure unitOfMeasure;
 

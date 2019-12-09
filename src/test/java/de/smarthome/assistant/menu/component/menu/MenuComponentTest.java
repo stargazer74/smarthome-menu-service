@@ -35,6 +35,7 @@ import de.smarthome.assistant.menu.persistance.model.Menu;
 import de.smarthome.assistant.menu.persistance.model.type.UnitOfMeasures;
 import de.smarthome.assistant.menu.persistance.repository.IngredientRepository;
 import de.smarthome.assistant.menu.persistance.repository.MenuRepository;
+import java.util.List;
 import java.util.Optional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -85,7 +86,8 @@ public class MenuComponentTest {
         final MenuResponseDto menuResponseDto = new MenuResponseDtoBuilder.Builder().asGriessbrei().build();
         final MenuRequestDto menuRequestDto = MenuMapper.INSTANCE.menuResponseDto2MenuRequestDto(menuResponseDto);
         final Menu menu = MenuMapper.INSTANCE.menuRequestDto2Menu(menuRequestDto);
-        Menu save = this.menuRepository.save(menu);
+        menu.getIngredients().forEach(a -> a.setMenu(menu));
+        this.menuRepository.save(menu);
         this.menuRepository.flush();
 
         /*
