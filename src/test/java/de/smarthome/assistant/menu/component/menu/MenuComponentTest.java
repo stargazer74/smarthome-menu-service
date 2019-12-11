@@ -103,4 +103,28 @@ public class MenuComponentTest {
         assertEquals(1, allMenus.get().getMenuDtos().size());
         assertEquals("Grießbrei", allMenus.get().getMenuDtos().get(0).getName());
     }
+
+    @Test
+    public void deleteSuccessTest() {
+        /*
+         * prepare
+         */
+        final MenuResponseDto menuResponseDto = new MenuResponseDtoBuilder.Builder().asGriessbrei().build();
+        final MenuRequestDto menuRequestDto = MenuMapper.INSTANCE.menuResponseDto2MenuRequestDto(menuResponseDto);
+        final Menu menu = MenuMapper.INSTANCE.menuRequestDto2Menu(menuRequestDto);
+        menu.getIngredients().forEach(a -> a.setMenu(menu));
+        final Menu savedMenu = this.menuRepository.save(menu);
+        this.menuRepository.flush();
+
+        /*
+         * call
+         */
+        final MenuComponent menuComponent = new MenuComponent(this.menuRepository, ingredientRepository);
+        menuComponent.delete(savedMenu.getId());
+
+        /*
+         * test
+         */
+        assertEquals(0, this.menuRepository.findAll().size());
+    }
 }

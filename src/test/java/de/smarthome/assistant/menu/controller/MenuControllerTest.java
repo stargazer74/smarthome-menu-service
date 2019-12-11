@@ -25,6 +25,7 @@ package de.smarthome.assistant.menu.controller;
 
 import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -87,5 +88,13 @@ public class MenuControllerTest {
         mockMvc.perform(get("/menu/list").characterEncoding("UTF-8").contentType(MediaType.APPLICATION_JSON)).andExpect(status().is(200))
                 .andExpect(jsonPath("$.menuDtos[0].name").value("Grießbrei")).
                 andExpect(jsonPath("$.menuDtos[1].name").value("Kartoffelsuppe"));
+    }
+
+    @Test
+    public void deleteSuccessTest() throws Exception {
+        /*
+         * test
+         */
+        mockMvc.perform(delete("/menu/123")).andExpect(status().isOk());
     }
 }

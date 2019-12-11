@@ -23,9 +23,9 @@
 
 package de.smarthome.assistant.menu.component.menu;
 
+import de.smarthome.assistant.menu.dto.MenuListDto;
 import de.smarthome.assistant.menu.dto.MenuRequestDto;
 import de.smarthome.assistant.menu.dto.MenuResponseDto;
-import de.smarthome.assistant.menu.dto.MenuListDto;
 import de.smarthome.assistant.menu.dto.mapper.MenuMapper;
 import de.smarthome.assistant.menu.persistance.model.Ingredient;
 import de.smarthome.assistant.menu.persistance.model.Menu;
@@ -85,5 +85,10 @@ public class MenuComponent implements MenuI {
         final MenuListDto weekMenuListDto = new MenuListDto();
         weekMenuListDto.setMenuDtos(weekMenuDtos);
         return Optional.of(weekMenuListDto);
+    }
+
+    @Override
+    public void delete(Long menuId) {
+        this.menuRepository.deleteById(menuId);
     }
 }

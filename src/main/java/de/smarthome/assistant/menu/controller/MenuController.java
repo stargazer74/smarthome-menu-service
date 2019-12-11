@@ -31,6 +31,10 @@ import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,7 +56,7 @@ public class MenuController {
      *
      * @param menuRequestDto the menu dto
      */
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<MenuResponseDto> insert(@Valid @RequestBody MenuRequestDto menuRequestDto) {
         return this.menu.insert(menuRequestDto).map(a -> ResponseEntity.ok().body(a)).orElseGet(() -> ResponseEntity.badRequest().build());
@@ -63,9 +67,20 @@ public class MenuController {
      *
      * @return ResponseEntity<WeekMenuListDto>
      */
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @GetMapping(value = "/list")
     public ResponseEntity<MenuListDto> list() {
         final Optional<MenuListDto> allMenus = this.menu.getAllMenus();
         return allMenus.map(a -> ResponseEntity.ok().body(a)).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    /**
+     * Delete a menu by given id
+     *
+     * @param id id of menu to be deleted
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping(value = "/{menuId}")
+    public void delete(@PathVariable("menuId") Long id) {
+        this.menu.delete(id);
     }
 }

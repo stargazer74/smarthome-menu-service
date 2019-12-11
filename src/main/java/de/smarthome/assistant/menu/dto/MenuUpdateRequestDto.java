@@ -21,19 +21,25 @@
  * SOFTWARE.
  */
 
-package de.smarthome.assistant.menu.component.menu;
+package de.smarthome.assistant.menu.dto;
 
-import de.smarthome.assistant.menu.dto.MenuRequestDto;
-import de.smarthome.assistant.menu.dto.MenuResponseDto;
-import de.smarthome.assistant.menu.dto.MenuListDto;
-import java.util.Optional;
+import java.util.List;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
-public interface MenuI {
+@Getter
+@Setter
+public class MenuUpdateRequestDto {
 
-    Optional<MenuResponseDto> insert(MenuRequestDto menuRequestDto);
+    @NotNull
+    private Long id;
 
-    Optional<MenuListDto> getAllMenus();
+    @NotEmpty
+    private String name;
 
-    void delete(Long menuId);
+    @NotEmpty
+    private List<IngredientsRequestDto> ingredients;
 
 }
