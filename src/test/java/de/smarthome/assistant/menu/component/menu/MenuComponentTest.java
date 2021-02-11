@@ -26,6 +26,7 @@ package de.smarthome.assistant.menu.component.menu;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import de.smarthome.assistant.menu.component.DataJpaTestBase;
 import de.smarthome.assistant.menu.dto.MenuListDto;
 import de.smarthome.assistant.menu.dto.MenuRequestDto;
 import de.smarthome.assistant.menu.dto.MenuResponseDto;

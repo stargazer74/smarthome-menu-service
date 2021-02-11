@@ -1,4 +1,4 @@
-package de.smarthome.assistant.menu.component.menu;
+package de.smarthome.assistant.menu.component;
 
 
 import de.smarthome.assistant.menu.TestBase;

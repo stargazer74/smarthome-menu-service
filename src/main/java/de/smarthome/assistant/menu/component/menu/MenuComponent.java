@@ -73,7 +73,7 @@ public class MenuComponent implements MenuI {
     /**
      * Returns a Optional<WeekMenuListDto> with a list of all menus in the database.
      *
-     * @return Optional<WeekMenuListDto>
+     * @return Optional of {@link MenuListDto}
      */
     public Optional<MenuListDto> getAllMenus() {
         final List<MenuResponseDto> weekMenuDtos = menuRepository.findAll().stream().map(MenuMapper.INSTANCE::menu2MenuResponseDto)
