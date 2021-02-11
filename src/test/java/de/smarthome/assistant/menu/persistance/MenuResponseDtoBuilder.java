@@ -23,12 +23,12 @@
 
 package de.smarthome.assistant.menu.persistance;
 
-import com.google.common.base.Strings;
 import de.smarthome.assistant.menu.dto.IngredientsResponseDto;
 import de.smarthome.assistant.menu.dto.MenuResponseDto;
 import de.smarthome.assistant.menu.persistance.model.type.UnitOfMeasures;
 import java.util.ArrayList;
 import java.util.List;
+import org.assertj.core.util.Strings;
 
 public class MenuResponseDtoBuilder {
 

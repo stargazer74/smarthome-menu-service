@@ -23,8 +23,8 @@
 
 package de.smarthome.assistant.menu.component.menu;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import de.smarthome.assistant.menu.dto.MenuListDto;
 import de.smarthome.assistant.menu.dto.MenuRequestDto;
@@ -33,25 +33,11 @@ import de.smarthome.assistant.menu.dto.mapper.MenuMapper;
 import de.smarthome.assistant.menu.persistance.MenuResponseDtoBuilder;
 import de.smarthome.assistant.menu.persistance.model.Menu;
 import de.smarthome.assistant.menu.persistance.model.type.UnitOfMeasures;
-import de.smarthome.assistant.menu.persistance.repository.IngredientRepository;
-import de.smarthome.assistant.menu.persistance.repository.MenuRepository;
-import java.util.List;
 import java.util.Optional;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.jupiter.api.Test;
 
-@RunWith(SpringRunner.class)
-@DataJpaTest
-public class MenuComponentTest {
+public class MenuComponentTest extends DataJpaTestBase {
 
-    @Autowired
-    private MenuRepository menuRepository;
-
-    @Autowired
-    private IngredientRepository ingredientRepository;
 
     @Test
     public void insertSuccessTest() {

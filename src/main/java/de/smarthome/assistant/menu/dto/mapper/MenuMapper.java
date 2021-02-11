@@ -27,7 +27,6 @@ import de.smarthome.assistant.menu.dto.IngredientsRequestDto;
 import de.smarthome.assistant.menu.dto.IngredientsResponseDto;
 import de.smarthome.assistant.menu.dto.MenuRequestDto;
 import de.smarthome.assistant.menu.dto.MenuResponseDto;
-import de.smarthome.assistant.menu.persistance.model.Ingredient;
 import de.smarthome.assistant.menu.persistance.model.Menu;
 import java.util.List;
 import java.util.stream.Collectors;

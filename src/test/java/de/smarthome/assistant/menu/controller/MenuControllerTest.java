@@ -23,7 +23,7 @@
 
 package de.smarthome.assistant.menu.controller;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -37,29 +37,20 @@ import de.smarthome.assistant.menu.persistance.MenuResponseDtoBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
-@RunWith(SpringRunner.class)
-@WebMvcTest(MenuController.class)
-public class MenuControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
+public class MenuControllerTest extends ControllerTestBase{
 
     @MockBean
     private MenuI menu;
 
     private MenuListDto menuListDto;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.menuListDto = new MenuListDto();
         final MenuResponseDto menuResponseDto_1 = new MenuResponseDtoBuilder.Builder().asGriessbrei().build();
